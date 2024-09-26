@@ -1,7 +1,10 @@
 import React from 'react';
 import './product.scss';
 
+
 const ProductPage = ({ products = [], addToCart }) => {
+    
+    
     return (
         <div className="product-container">
             {products.length > 0 ? (
@@ -30,9 +33,11 @@ const ProductPage = ({ products = [], addToCart }) => {
                         </div>
                     </div>
                 ))
+                
             ) : (
                 <p>상품이 없습니다.</p>
             )}
+            
         </div>
     );
 };

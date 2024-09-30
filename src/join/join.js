@@ -26,7 +26,7 @@ const Join = () => {
       // Axios를 통해 Spring Boot API로 POST 요청
       await axios.post('/api/auth/join', user);
       alert('회원가입 완료!');
-      navigate('/'); // 회원가입 후 메인 페이지로 이동
+      navigate('/login'); // 회원가입 후 로그인페이지로 이동
     } catch (error) {
       console.error('회원가입 실패:', error);
       alert('회원가입 중 오류가 발생했습니다.');

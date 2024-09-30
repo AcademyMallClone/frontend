@@ -11,12 +11,14 @@ import Payment from './payment/Payment';
 import ProductSearch from './productSearch/ProductSearch';
 import { useState } from 'react';
 import SearchResultPage from './searchResultPage/SearchResultPage';
-import Join from './join/join';
-
+import Join from './join/Join';
 
 function App() {
     // 장바구니에 담긴 상품 상태 관리
     const [cartItems, setCartItems] = useState([]);
+
+    // 로그인된 사용자 정보 상태 관리
+    const [profile, setProfile] = useState(null);
 
     // 장바구니에 제품 추가 함수
     const addToCart = (product) => {
@@ -53,8 +55,9 @@ function App() {
 
     return (
         <div className="App">
-            {/* Header, Footer, Routes 등 */}
-            <Header />
+            {/* Header에 profile 상태와 setProfile 전달 */}
+            <Header profile={profile} setProfile={setProfile} />
+
             <Routes>
                 <Route path="/" element={<MainPage />} />
                 <Route path="/products" element={<ProductPage products={defaultProducts} addToCart={addToCart} />} />
@@ -69,16 +72,16 @@ function App() {
                         />
                     } 
                 />
-                <Route path="/login" element={<Login />} />
+                {/* Login에 setProfile 전달하여 로그인 후 프로필 정보 업데이트 */}
+                <Route path="/login" element={<Login setProfile={setProfile} />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/productSearch" element={<ProductSearch />} />
-                {/* /search 경로는 SearchResultsPage 컴포넌트만 사용 */}
                 <Route path="/search" element={<SearchResultPage addToCart={addToCart} />} />
                 <Route path='/join' element={<Join />}/>
-                
             </Routes>
+
             <Footer />
-          </div>
+        </div>
     );
 }
 

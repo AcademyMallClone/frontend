@@ -1,0 +1,180 @@
+/* Google Fonts 사용을 위해 CSS 파일에 추가 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+#header {
+    background-color: #ffffff;
+
+    /* 폰트 설정 */
+    font-family: 'Roboto', sans-serif;
+
+    .inner {
+        max-width: 1300px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+        padding: 0 20px; /* 좌우 패딩 추가 */
+    }
+
+    h1 {
+        margin: 0px;
+        font-size: 32px;
+        font-weight: 700; /* 굵은 제목 */
+        letter-spacing: 1px; /* 자간 추가 */
+        color: #333; /* 제목 색상 */
+        transition: color 0.3s;
+
+        &:hover {
+            color: #0071e3; /* 제목에 호버할 때 색상 변경 */
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: black; /* 기본 링크 색상 설정 */
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px; /* 항목 간의 간격을 유연하게 설정 */
+    }
+
+    ul li {
+        margin: 0px 10px;
+
+        a {
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease, transform 0.3s ease;
+
+            &.active {
+                font-weight: bold;
+                color: #0071e3;
+            }
+
+            &:hover {
+                color: #0071e3;
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    // 햄버거 메뉴 버튼
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+
+        span {
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+    }
+}
+
+// 반응형 디자인 추가
+@media (max-width: 1024px) {
+    /* 창이 1024px 이하로 줄어들 때 네비게이션이 자연스럽게 줄어듦 */
+    #header .inner {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    ul {
+        gap: 15px; /* 항목 간격 축소 */
+    }
+
+    ul li a {
+        font-size: 16px; /* 글자 크기 축소 */
+    }
+
+    h1 {
+        font-size: 28px; /* 제목 크기 축소 */
+    }
+}
+
+@media (max-width: 768px) {
+    /* 창이 768px 이하일 때 햄버거 메뉴가 등장 */
+    #header .inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: auto;
+    }
+
+    ul {
+        flex-direction: column;
+        width: 30%; /* 메뉴의 너비 설정 */
+        background-color: #ffffff;
+        position: absolute;
+        right: 0; /* 메뉴 위치는 오른쪽에 유지 */
+        top: 80px;
+        z-index: 1000;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 0 2%;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    #header.active ul {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    #header .menu-toggle {
+        display: flex; /* 작은 화면에서 햄버거 버튼 보이기 */
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    #header ul li {
+        width: 100%;
+        text-align: left; /* 메뉴 항목 텍스트를 왼쪽 정렬 */
+        padding: 15px 10px;
+        border-bottom: 1px solid #e0e0e0;
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover {
+            background-color: transparent;
+        }
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    #header h1 {
+        font-size: 20px;
+    }
+
+    ul {
+        gap: 10px;
+    }
+
+    ul li {
+        text-align: left; /* 작은 화면에서도 메뉴 항목을 왼쪽 정렬 */
+    }
+
+    .menu-toggle span {
+        background-color: #0071e3;
+    }
+}

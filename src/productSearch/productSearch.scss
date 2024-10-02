@@ -1,0 +1,38 @@
+.search-container {
+    margin-top: 10px;
+    display: flex;
+    
+
+    form {
+        display: flex;
+        align-items: center;
+
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            transition: all 0.3s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: #0071e3; 
+            }
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-left: 10px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #5e5e5e;
+            }
+        }
+    }
+}

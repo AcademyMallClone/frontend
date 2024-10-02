@@ -1,0 +1,110 @@
+.login-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 40px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.6em;
+  margin-bottom: 30px;
+  color: #1d1d1f; 
+  font-weight: 600;
+}
+
+.login-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.login-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #6e6e73; 
+  font-size: 0.95em;
+}
+
+.login-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d2d2d7;
+  border-radius: 8px;
+  background-color: #f5f5f7;
+  font-size: 1em;
+  color: #1d1d1f;
+  transition: all 0.3s ease;
+
+  &:focus {
+      border-color: #000000; 
+      outline: none;
+      background-color: #fff;
+  }
+}
+
+.lb {
+  width: 100%;
+  padding: 12px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+      background-color: #5e5e5e;
+      transform: translateY(-2px);
+  }
+
+  &:active {
+      background-color: #5e5e5e;
+  }
+
+  
+  
+}
+
+
+
+/* 회원가입 버튼 스타일 */
+.signup {
+  width: 100%;
+  padding: 12px;
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin-top: 3px;
+}
+
+.signup a {
+  color: white; /* 링크 텍스트를 흰색으로 설정 */
+  text-decoration: none; /* 링크의 밑줄 제거 */
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.signup:hover {
+  background-color: #5e5e5e;
+  transform: translateY(-2px); /* 버튼이 살짝 위로 이동하는 효과 */
+}
+
+.signup:active {
+  background-color: #4a4a4a; /* 클릭 시 조금 더 어두운 색 */
+}

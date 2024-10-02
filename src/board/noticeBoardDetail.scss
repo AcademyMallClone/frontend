@@ -1,0 +1,65 @@
+.notice-detail {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    position: relative; /* 부모 요소에 대한 상대적 위치를 설정 */
+}
+
+.notice-detail h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.notice-detail .date {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.notice-detail .content {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+.notice-detail .content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.notice-detail .content p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* 버튼 그룹 */
+.button-group {
+    position: absolute; /* 부모 컨테이너 기준으로 위치 설정 */
+    right: 20px; /* 오른쪽에서 20px 떨어진 위치 */
+    bottom: 20px; /* 아래에서 20px 떨어진 위치 */
+    display: flex;
+    justify-content: flex-end; /* 버튼을 우측 정렬 */
+    margin-top: 20px;
+}
+
+/* 목록 버튼 스타일 */
+.back-button {
+    padding: 3px 8px; /* padding을 줄여서 버튼 크기 줄임 */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px; /* 글자 크기를 작게 조정 */
+    min-width: 50px; /* 버튼의 최소 너비를 작게 설정 */
+    height: 33px; 
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,58 @@
+.edit-notice-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-notice-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.edit-notice-form {
+    margin-top: 20px;
+}
+
+.edit-form-group {
+    margin-bottom: 15px;
+}
+
+.edit-form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.edit-form-input,
+.edit-form-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.edit-form-textarea {
+    min-height: 100px; /* 높이를 증가시켜 사용자에게 더 넓은 작성 공간 제공 */
+    resize: vertical; /* 사용자가 수직으로 크기를 조정할 수 있도록 설정 */
+}
+
+.edit-submit-button {
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-submit-button:hover {
+    background-color: #2e2e2f;
+}

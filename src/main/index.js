@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // axios 추가
 import './index.scss';
+import ChatToggleComponent from '../chat/ChatIcon';
+
 
 const MainPage = () => {
-  const [products, setProducts] = useState([
-    { id: 1, name: '일반적인 셔츠', price: '30,000원', imgsrc: '/images/shirt01.jpg' },
-    { id: 2, name: '특별한 셔츠', price: '35,000원', imgsrc: '/images/shirt02.jpg' },
-    { id: 3, name: '독특한 셔츠', price: '40,000원', imgsrc: '/images/shirt03.jpg' },
-    { id: 4, name: '새로운 셔츠', price: '45,000원', imgsrc: '/images/shirt04.jpg' },
-  ]);
+  const [products, setProducts] = useState([]);
+
+  // 백엔드에서 최신 상품 목록 불러오기
+  useEffect(() => {
+    axios.get('/api/products/items') // 백엔드 API에서 상품 목록 가져오기
+      .then(response => {
+        setProducts(response.data); // API로부터 받은 데이터를 상태로 설정
+      })
+      .catch(error => {
+        console.error("상품을 불러오는 중 오류 발생:", error);
+      });
+  }, []);
 
   return (
     <div id="main">
@@ -24,25 +33,31 @@ const MainPage = () => {
         <h2>최신상품</h2>
 
         <div id="product-items" className="product-container-index">
-          {products.map((product) => (
-            <Link
-              to={`/product/${product.id}`}
-              key={product.id}
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
-              <div className="product-card-index">
-                <div className="product-img-index">
-                  <img src={product.imgsrc} alt={product.name} />
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Link
+                to={`/product/${product.productId}`} // productId를 사용
+                key={product.productId}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div className="product-card-index">
+                  <div className="product-img-index">
+                    <img src={product.imageUrl} alt={product.name} /> {/* 이미지 경로 및 이름 */}
+                  </div>
+                  <div className="product-contents-index">
+                    <span className="product-name-index">제품명: {product.productName}</span>
+                    <br></br>
+                    <span className="product-price-index">가격: {product.price.toLocaleString()}원</span> {/* 가격 포맷 */}
+                  </div>
                 </div>
-                <div className="product-contents-index">
-                  <span className="product-name-index">제품명: {product.name}</span>
-                  <span className="product-price-index">가격: {product.price}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          ) : (
+            <p>상품이 없습니다.</p> // 상품이 없을 경우 출력 메시지
+          )}
         </div>
       </div>
+      <ChatToggleComponent/>
     </div>
   );
 };

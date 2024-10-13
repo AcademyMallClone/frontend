@@ -15,7 +15,8 @@ import Join from './join/join';
 import ProductDetail from './product/ProductDetail'; 
 import NoticeDetail from './board/noticeBoardDetail';
 import NoticeBoard from './board/noticeBoard';
-
+import AddNotice from './board/addNotice';
+import EditNotice from './board/editNotice';
 
 function App() {
     // 장바구니에 담긴 상품 상태 관리
@@ -75,12 +76,16 @@ function App() {
                 <Route path="/cart" element={<Cart cartItems={cartItems} updateQuantity={updateQuantity} updateSize={updateSize} clearCart={clearCart} />} />
                 {/* Login에 setProfile 전달하여 로그인 후 프로필 정보 업데이트 */}
                 <Route path="/login" element={<Login setProfile={setProfile}/>} />
-                <Route path="/payment" element={<Payment />} />
+                <Route path="/payment" 
+                       element={<Payment cartItems={cartItems} />} 
+                />
                 <Route path="/productSearch" element={<ProductSearch />} />
                 <Route path="/search" element={<SearchResultPage products={Products} addToCart={addToCart} />} />
                 <Route path='/join' element={<Join />} />
                 <Route path="/notices" element={<NoticeBoard />} />
-                <Route path="/notice/:id" element={<NoticeDetail />} />
+                <Route path="/add-notice" element={<AddNotice />} />
+                <Route path="/notice/:id" element={<NoticeDetail />} /><Route path="/add-notice" element={<AddNotice />} />
+                <Route path="/edit-notice/:id" element={<EditNotice />} />
             </Routes>
             <Footer />
         </div>

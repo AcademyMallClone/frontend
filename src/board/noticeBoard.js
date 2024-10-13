@@ -1,41 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './noticeBoard.scss';
 
 const NoticeBoard = () => {
-    const notices = [
-        { id: 1, title: '상품가이드', date: '2024-09-19' },
-        { id: 2, title: '신상품 입고 안내', date: '2024-09-19' },
-        { id: 3, title: 'Mall 오픈을 축하드립니다.', date: '2024-09-19' },
-        { id: 4, title: '배송 안내', date: '2024-09-20' },
-        { id: 5, title: '회원 혜택 안내', date: '2024-09-21' },
-        { id: 6, title: '이벤트 안내', date: '2024-09-22' },
-        { id: 7, title: '고객센터 운영시간', date: '2024-09-23' },
-        { id: 8, title: '리뷰 작성 가이드', date: '2024-09-24' },
-        { id: 9, title: '특가 행사 안내', date: '2024-09-25' },
-        { id: 10, title: '추석 배송 일정 안내', date: '2024-09-26' },
-        { id: 11, title: '재입고 안내', date: '2024-09-27' },
-        { id: 12, title: '서비스 점검 안내', date: '2024-09-28' }
-    ];
-
+    const [notices, setNotices] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const noticesPerPage = 10;
 
-    // 현재 페이지에 표시할 공지사항들 계산
+    useEffect(() => {
+        fetchNotices();
+    }, []);
+
+    const fetchNotices = async () => {
+        try {
+            const response = await axios.get('http://localhost:9090/api/notices');
+            setNotices(response.data);
+        } catch (error) {
+            console.error('Error fetching notices', error);
+        }
+    };
+
     const indexOfLastNotice = currentPage * noticesPerPage;
     const indexOfFirstNotice = indexOfLastNotice - noticesPerPage;
     const currentNotices = notices.slice(indexOfFirstNotice, indexOfLastNotice);
 
-    // 페이지 번호 클릭 핸들러
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-    // 총 페이지 수 계산
     const totalPages = Math.ceil(notices.length / noticesPerPage);
 
     return (
-        <div>
+        <div className="notice-board">
             <h2>공지사항</h2>
-            <table>
+
+            {/* 공지사항 목록 */}
+            <table className="notice-table">
                 <thead>
                     <tr>
                         <th>번호</th>
@@ -48,7 +46,7 @@ const NoticeBoard = () => {
                         <tr key={notice.id}>
                             <td>{indexOfFirstNotice + index + 1}</td>
                             <td>
-                                <Link to={`/notice/${notice.id}`} style={{ color: 'black'}}>{notice.title}</Link>
+                                <Link to={`/notice/${notice.id}`} className="notice-link" style={{ color: 'black' }}>{notice.title}</Link>
                             </td>
                             <td>{notice.date}</td>
                         </tr>
@@ -57,10 +55,10 @@ const NoticeBoard = () => {
             </table>
 
             {/* 페이지네이션 */}
-            <div>
-                <ul className="pagination">
+            <div className="pagination">
+                <ul>
                     {[...Array(totalPages)].map((_, index) => (
-                        <li key={index}>
+                        <li key={index} className={index + 1 === currentPage ? "active" : ""}>
                             <button onClick={() => paginate(index + 1)}>
                                 {index + 1}
                             </button>
@@ -68,6 +66,9 @@ const NoticeBoard = () => {
                     ))}
                 </ul>
             </div>
+
+            {/* 공지사항 작성 링크 */}
+            <Link to="/add-notice" className="add-notice-link" style={{ color: 'white' }}>공지사항 작성하기</Link>
         </div>
     );
 };

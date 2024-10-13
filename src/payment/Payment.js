@@ -1,94 +1,63 @@
-import React, { useState } from 'react';
-import './payment.scss'
+import './payment.scss'; // SCSS 파일 불러오기
+import { totalprice } from '../cart/Cart'; // 총 결제 금액 불러오기
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
-const Payment = (props) => {
-    const [paymentMethod, setPaymentMethod] = useState('');
-    const [cardNumber, setCardNumber] = useState('');
-    const [cardName, setCardName] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [cvv, setCvv] = useState('');
-
-    const handlePaymentSubmit = (e) => {
-        e.preventDefault();
-        // 실제 결제 처리 로직을 추가할 수 있는 부분
-        alert('결제가 완료되었습니다!');
+const Payment = ({ cartItems }) => {
+  useEffect(() => {
+    const jquery = document.createElement("script");
+    jquery.src = "http://code.jquery.com/jquery-1.12.4.min.js";
+    const iamport = document.createElement("script");
+    iamport.src = "http://cdn.iamport.kr/js/iamport.payment-1.1.7.js";
+    document.head.appendChild(jquery);
+    document.head.appendChild(iamport);
+    return () => {
+      document.head.removeChild(jquery);
+      document.head.removeChild(iamport);
     };
+  }, [cartItems]);
 
-    return (
-        <div id="payment">
-            <h2>가상결제</h2>
-            <form onSubmit={handlePaymentSubmit}>
-                <div className="form-group">
-                    <label htmlFor="payment-method">결제수단</label>
-                    <select
-                        id="payment-method"
-                        value={paymentMethod}
-                        onChange={(e) => setPaymentMethod(e.target.value)}
-                        required
-                    >
-                        <option value="">선택하세요</option>
-                        <option value="card">신용카드</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="bank-transfer">계좌이체</option>
-                    </select>
-                </div>
+  const requestPay = () => {
+    const { IMP } = window;
+    IMP.init('imp76575565'); // 아임포트 가맹점 식별코드
 
-                {paymentMethod === 'card' && (
-                    <>
-                        <div className="form-group">
-                            <label htmlFor="card-number">카드번호</label>
-                            <input
-                                type="text"
-                                id="card-number"
-                                value={cardNumber}
-                                onChange={(e) => setCardNumber(e.target.value)}
-                                required
-                                placeholder="카드번호 입력"
-                            />
-                        </div>
+    const amount = totalprice(cartItems); // 총 결제 금액 계산
+    IMP.request_pay({
+      pg: 'kakaopay.TC0ONETIME',
+      pay_method: 'card',
+      merchant_uid: new Date().getTime(),
+      name: '결제 상품',
+      amount: amount, // 결제 금액
+      buyer_email: 'test@naver.com',
+      buyer_name: '고객명',
+      buyer_tel: '010-1234-5678',
+      buyer_addr: '서울특별시',
+      buyer_postcode: '123-456',
+    }, async (rsp) => {
+      if (rsp.success) {
+        try {
+          const { data } = await axios.post(`http://localhost:9090/verifyIamport/${rsp.imp_uid}`);
+          if (rsp.paid_amount === data.response.amount) {
+            alert('결제 성공');
+            // 메인 페이지로 리다이렉트
+            window.location.href = 'http://localhost:3000/'; // 메인 페이지 URL로 변경
+          } else {
+            alert('결제 금액 불일치: 결제 실패');
+          }
+        } catch (error) {
+          alert('결제 검증 실패');
+        }
+      } else {
+        alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+      }
+    });
+  };
 
-                        <div className="form-group">
-                            <label htmlFor="card-name">카드 소유자명</label>
-                            <input
-                                type="text"
-                                id="card-name"
-                                value={cardName}
-                                onChange={(e) => setCardName(e.target.value)}
-                                required
-                                placeholder="소유자명 입력"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="expiry-date">유효기간</label>
-                            <input
-                                type="text"
-                                id="expiry-date"
-                                value={expiryDate}
-                                onChange={(e) => setExpiryDate(e.target.value)}
-                                required
-                                placeholder="MM/YY"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="cvv">CVV</label>
-                            <input
-                                type="text"
-                                id="cvv"
-                                value={cvv}
-                                onChange={(e) => setCvv(e.target.value)}
-                                required
-                                placeholder="CVV 입력"
-                            />
-                        </div>
-                    </>
-                )}
-
-                <button type="submit">결제하기</button>
-            </form>
-        </div>
-    );
+  return (
+    <div className="payment-container">
+      <button className="payment-button" onClick={requestPay}>결제하기</button>
+    </div>
+  );
 };
 
 export default Payment;

@@ -33,11 +33,11 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
   };
 
     // try {
-    //   // 백엔드 로그인 API 호출
-    //   const response = await axios.post('/login', new URLSearchParams({
-    //     username: email,
+    //   const response = await axios.post('/perform_login', new URLSearchParams({
+    //     // Spring Security의 formLogin 방식에 맞게 폼 데이터를 전송
+    //     email: email,
     //     password: password
-    //   }), {withCredentials: true});
+    //   }), {'Content-Type':'application/'},{});
 
     //   if (response.status === 200) {
     //     // 로그인 성공 시 프로필 정보 가져오기
@@ -54,6 +54,8 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
     //     alert('로그인 중 문제가 발생했습니다. 나중에 다시 시도해주세요.');
     //   }
     // }
+
+
   return (
     <div className="login-container">
       <h2>로그인</h2>

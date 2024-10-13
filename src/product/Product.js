@@ -1,51 +1,66 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './product.scss';
 
-const ProductPage = ({ products = [], addToCart }) => {
-    const [cart, setCart] = useState([]); // 장바구니 상태 추가
+const ProductPage = ({ addToCart }) => {
+    const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
+    const [loading, setLoading] = useState(true); // 로딩 상태 추가
+    const navigate = useNavigate();
 
+    // 상품 목록 불러오기 (API에서 가져오기)
+    useEffect(() => {
+        axios.get('/api/products/items') // 백엔드 API 호출
+            .then(response => {
+                setProducts(response.data); // API 응답 데이터를 상태에 저장
+                setLoading(false); // 로딩 완료
+            })
+            .catch(error => {
+                console.error("상품을 불러오는 중 오류 발생:", error);
+                setLoading(false); // 로딩 에러 발생 시에도 완료 처리
+            });
+    }, []);
+
+    // 장바구니에 상품 추가
     const handleAddToCart = (product) => {
-        const existingProduct = cart.find((item) => item.id === product.id);
-        
+        const existingProduct = cart.find((item) => item.productId === product.productId);
+
         if (existingProduct) {
-            // 장바구니에 이미 있는 제품이라면 수량만 증가시킴
+            // 장바구니에 이미 있는 제품이라면 수량 증가
             setCart(cart.map((item) =>
-                item.id === product.id
+                item.productId === product.productId
                     ? { ...item, quantity: item.quantity + 1 }
                     : item
             ));
         } else {
-            // 장바구니에 없는 경우 새로 추가
+            // 장바구니에 없는 제품 새로 추가
             setCart([...cart, { ...product, quantity: 1 }]);
         }
 
-        // 제품을 장바구니에 추가하는 외부 함수 호출 (addToCart가 있을 경우)
+        // 외부 장바구니 추가 함수 호출 (있을 경우)
         if (addToCart) {
             addToCart(product);
         }
 
-        // 성공 알림 메시지 표시
-        alert(`${product.name}이(가) 장바구니에 추가되었습니다.`);
+        // 성공 메시지 알림
+        alert(`${product.productName}이(가) 장바구니에 추가되었습니다.`);
+        navigate('/cart'); // 장바구니로 리디렉션
     };
 
     return (
         <div className="product-container">
             {products.length > 0 ? (
                 products.map((product) => (
-                    <div key={product.id} className="product-item">
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <div key={product.productId} className="product-item">
+                        <Link to={`/product/${product.productId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             <div className="product-card">
                                 <div className="image-box">
-                                    <img src={`/images/${product.imgsrc}`} alt={product.name} />
+                                    <img src={product.imageUrl} alt={product.productName} />
                                 </div>
                                 <div className="profile-box">
                                     <ul>
-                                        <li className="product-title">
-                                            
-                                        </li>
-                                        <li className="product-name">제품명: {product.name}</li>
-                                        <li className="product-price">가격: {product.price.toLocaleString()}원</li>
+                                        <li className="product-name">제품명: {product.productName}</li>                                        <li className="product-price">가격: {product.price.toLocaleString()}원</li>
                                         <li className="product-description">상세설명: {product.description}</li>
                                     </ul>
                                     <button

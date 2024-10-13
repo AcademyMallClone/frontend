@@ -6,7 +6,7 @@ import "./header.scss";
 const Header = ({ profile, setProfile }) => {
 
     const handleLogout = () => {
-        axios.post('/logout', {}, { withCredentials: true }) // 로그아웃 시 세션 쿠키 포함
+        axios.post('api/auth/logout', {}, { withCredentials: true }) // 로그아웃 시 세션 쿠키 포함
             .then(() => {
                 console.log('check')
                 setProfile(null); // 로그아웃 후 상태 초기화

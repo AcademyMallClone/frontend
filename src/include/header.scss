@@ -178,3 +178,49 @@
         background-color: #0071e3;
     }
 }
+
+.logout_header {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 사용자 이름과 버튼 간격 */
+    background-color: #f1f1f1; /* 백그라운드 색상 (원하는 경우 제거 가능) */
+    padding: 5px 10px;
+    border-radius: 5px; /* 모서리를 둥글게 */
+}
+
+.logout_header .username {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333; /* 사용자 이름 텍스트 색상 */
+}
+
+.logout_header .logout_button {
+    font-size: 16px;
+    padding: 5px 10px;
+    background-color: #0071e3; /* 로그아웃 버튼 배경 색상 */
+    color: #fff; /* 버튼 텍스트 색상 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout_header .logout_button:hover {
+    background-color: #005bb5; /* 호버 시 버튼 색상 변경 */
+}
+
+@media (max-width: 768px) {
+    .logout_header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .logout_header .username {
+        font-size: 16px; /* 작은 화면에서 텍스트 크기 조정 */
+    }
+
+    .logout_header .logout_button {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+}

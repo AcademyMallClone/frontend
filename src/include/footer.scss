@@ -1,0 +1,100 @@
+#footer {
+    background-color: #f8f8f8;
+    padding: 20px 0;
+  
+    #footer-info {
+      display: flex;
+      flex-wrap: wrap; // 화면이 작아지면 요소들이 줄 바꿈되도록 설정
+      justify-content: space-between;
+      padding: 20px 0;
+  
+      .inner {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+  
+        div {
+          flex: 1 1 30%; // 각 섹션을 화면 크기에 맞춰 30%씩 차지하도록 설정
+          min-width: 250px; // 최소 너비 설정으로 너무 작아지지 않도록 함
+          margin-bottom: 20px;
+        }
+  
+        h3 {
+          font-size: 1.2rem;
+          margin-bottom: 10px;
+        }
+  
+        p, ul {
+          font-size: 1rem;
+        }
+  
+        ul {
+          padding: 0;
+          list-style: none;
+  
+          li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+          }
+  
+          span {
+            font-size: 0.8rem;
+            color: gray;
+          }
+        }
+      }
+    }
+  
+    #footer-copy {
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+  
+      .inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        font-size: 0.9rem;
+  
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0;
+          list-style: none;
+  
+          li {
+            margin-right: 15px;
+          }
+        }
+      }
+  
+      #copyright {
+        font-size: 0.8rem;
+        color: #777;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+  
+  // 미디어 쿼리: 화면이 768px 이하로 줄어들면 적용
+  @media (max-width: 768px) {
+    #footer-info .inner {
+      flex-direction: column; // 세로 방향으로 정렬
+    }
+  
+    #footer-copy .inner {
+      flex-direction: column; // 세로 방향으로 정렬
+      text-align: center;
+  
+      ul {
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+  
+    #footer-copy #copyright {
+      text-align: center;
+    }
+  }
+  

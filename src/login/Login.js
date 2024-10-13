@@ -17,7 +17,6 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
 
       if (response.status === 200) {
         // 로그인 성공 시 프로필 정보 가져오기
-        console.log("확인용 로그");
         const profileResponse = await axios.get('/api/auth/profile', { withCredentials: true });
         setProfile(profileResponse.data);  // 로그인 후 프로필 정보 상태 업데이트
         alert('로그인 성공');
@@ -33,6 +32,30 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
     }
   };
 
+    // try {
+    //   const response = await axios.post('/perform_login', new URLSearchParams({
+    //     // Spring Security의 formLogin 방식에 맞게 폼 데이터를 전송
+    //     email: email,
+    //     password: password
+    //   }), {'Content-Type':'application/'},{});
+
+    //   if (response.status === 200) {
+    //     // 로그인 성공 시 프로필 정보 가져오기
+    //     const profileResponse = await axios.get('/api/auth/profile', { withCredentials: true });
+    //     setProfile(profileResponse.data);  // 로그인 후 프로필 정보 상태 업데이트
+    //     alert('로그인 성공');
+    //     navigate('/');  // 로그인 성공 시 메인 페이지로 이동
+    //   }
+    //   //에러처리
+    // } catch (error) {
+    //   if (error.response && error.response.status === 401) {
+    //     alert('이메일 또는 비밀번호가 일치하지 않습니다');
+    //   } else {
+    //     alert('로그인 중 문제가 발생했습니다. 나중에 다시 시도해주세요.');
+    //   }
+    // }
+
+
   return (
     <div className="login-container">
       <h2>로그인</h2>
@@ -44,6 +67,7 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
             id="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
+            placeholder="Email"
             required 
           />
         </div>
@@ -54,6 +78,7 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
             id="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
+            placeholder="Password"
             required 
           />
         </div>
@@ -67,3 +92,4 @@ const Login = ({ setProfile }) => {  // setProfile을 props로 받음
 };
 
 export default Login;
+

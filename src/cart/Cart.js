@@ -42,3 +42,6 @@ const Cart = ({ cartItems, updateQuantity, clearCart }) => {
 };
 
 export default Cart;
+
+// 총 가격을 export하여 다른 파일에서 사용할 수 있도록 함
+export const totalprice = (cartItems) => cartItems.reduce((total, item) => total + item.price * item.quantity, 0);

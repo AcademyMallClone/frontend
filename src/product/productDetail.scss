@@ -1,0 +1,201 @@
+/* productDetail.scss */
+
+/* 전체 레이아웃 */
+.product-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* 제품 이미지 섹션 */
+.product-detail-img {
+    flex: 2; /* 이미지 영역을 더 크게 설정 */
+    max-width: 700px; /* 최대 크기 설정 */
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* 제품 정보 섹션 */
+.product-detail-info {
+    flex: 1; /* 설명 부분의 비율을 줄임 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    h1 {
+        font-size: 2rem; /* 제목 크기를 약간 줄임 */
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    .product-price {
+        font-size: 1.5rem; /* 가격 크기를 약간 줄임 */
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #000000;
+    }
+
+    .product-description {
+        font-size: 0.9rem; /* 설명 크기를 줄임 */
+        line-height: 1.5;
+        color: #555;
+        margin-bottom: 20px; /* 설명과 아래 요소 간의 간격 조정 */
+    }
+
+    .size-selection {
+        margin-bottom: 15px;
+
+        h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+                border-color: #333;
+            }
+        }
+    }
+
+    .add-to-cart-button {
+        background-color: #000000;
+        color: white;
+        padding: 15px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #5e5e5e;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+/* 고객 리뷰 섹션 */
+.product-reviews {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+
+    h2 {
+        font-size: 1.5rem; /* 리뷰 섹션 제목 크기를 줄임 */
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    p {
+        font-size: 0.9rem; /* 리뷰 설명의 크기를 줄임 */
+        color: #777;
+    }
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .product-detail-info {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .add-to-cart-button {
+        width: 100%;
+    }
+}
+/* 고객 리뷰 입력 필드와 등록 버튼 스타일 */
+.review-input {
+    margin-top: 20px;
+
+    h3 {
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    textarea {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:focus {
+            outline: none;
+            border-color: #333;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    button {
+        margin-top: 10px;
+        background-color: #000000;
+        color: white;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #5e5e5e;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+.rating {
+    margin-top: 10px;
+
+    i {
+        color: #ddd; /* 기본 별 색상 */
+        font-size: 2rem;
+        cursor: pointer;
+
+        &.fas {
+            color: #ffc107; /* 선택된 별의 색상 */
+        }
+    }
+}
+.average-rating {
+    margin-bottom: 20px;
+
+    h3 {
+        font-size: 1.5rem;
+        color: #333;
+    }
+}
+

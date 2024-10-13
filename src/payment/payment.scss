@@ -1,0 +1,26 @@
+.payment-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh; // 전체 높이
+  padding: 5px;  // 상하 여백을 줄임
+  background-color: #f0f0f0;
+}
+
+.payment-button {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 16px;  // 버튼 내부 여백 조정
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: auto;  // 너비를 글씨에 맞게 자동 조정
+  display: inline-block;  // 버튼을 글씨 크기에 맞춤
+}
+
+.payment-button:hover {
+  background-color: #2980b9;
+}
